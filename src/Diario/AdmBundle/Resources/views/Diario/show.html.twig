@@ -1,0 +1,127 @@
+{% extends "DiarioAdmBundle::layout.html.twig" %}
+{% from 'MopaBootstrapBundle::flash.html.twig' import session, advanced_flash, session_flash, flash %}  
+
+{% block title %}Diario{% endblock %}
+
+{% block content %}
+    <h1>Diario</h1>
+
+    {% if app.session.flashbag.peekAll|length > 0 %}
+        <div class="row">
+            <div class="col-lg-12">
+                {{ advanced_flash('warning', 'Warning!', '', true) }}
+                {{ session_flash() }}
+            </div>
+        </div>
+    {% endif %}
+
+    <table class="table table-hover record_properties">
+        <tbody>
+            <tr>
+                <th scope="row">Id</th>
+                <td>{{ turma.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Codigo da turma</th>
+                <td>{{ turma.codigoTurma }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Disciplina</th>
+                <td>
+                    <!-- <a href="{#{{ path('disciplina_show', {id: turma.disciplina.id}) }}#}"> -->
+                        {{ turma.disciplina.nome }}
+                    <!-- </a> -->
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Curso</th>
+                <td>
+                    <!-- <a href="{#{{ path('curso_show', {id: turma.disciplina.curso.id}) }}#}"> -->
+                        {{ turma.disciplina.curso }}
+                    <!-- </a> -->
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Professor</th>
+                <td>
+                    <!-- <a href="{#{{ path('professor_show', {id: turma.professor.id}) }}#}"> -->
+                        {{ turma.professor }}
+                    <!-- </a> -->
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Ano</th>
+                <td>{{ turma.ano }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Semestre</th>
+                <td>{{ turma.semestre }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Data Inicio</th>
+                <td>{{ turma.dataInicio|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Data Termino</th>
+                <td>{{ turma.dataTermino|date('d-m-Y') }}</td>
+            </tr>
+            {% for horario in turma.horarios %}
+                <tr>
+                    <th scope="row">Horario {{ loop.index }}</th>
+                    <td>
+                        <!-- <a href="{#{{ path('horario_show', {id: horario.id}) }}#}"> -->
+                            {{ horario.dia }}
+                        <!-- </a> -->
+                    </td>
+                </tr>
+            {% endfor %}
+            {% if turma.aulas is empty and turma.horarios is not empty %}
+                <tr>
+                    <th scope="row">Gerar aulas</th>
+                    <td>
+                        <a href="{{ path('turma_gerar_aulas', {idTurma: turma.id}) }}">Gerar aulas</a>
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    {{ form_start(delete_form) }}
+    {{ form_widget(delete_form) }}
+
+        <div class="btn-group record_actions">
+
+            <a class="btn btn-info" href="{{ path('diario') }}">
+                <i class="fa fa-list"></i> {{ 'Back to the list'|trans({}, 'admin') }}
+            </a>
+
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_confirm">
+                <i class="fa fa-trash-o"></i> {{ 'Delete'|trans({}, 'admin') }}
+            </button>
+
+        </div>
+
+        <div class="modal fade" id="delete_confirm" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3>{{ 'Confirm delete'|trans({}, 'admin') }}</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ 'You are about to delete an item'|trans({}, 'admin') }}, {{ 'this procedure is irreversible'|trans({}, 'admin') }}.</p>
+                        <p>{{ 'Do you want to proceed?'|trans({}, 'admin') }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger">{{ 'Yes'|trans({}, 'admin') }}</button>
+                        <button class="btn btn-default" data-dismiss="modal">{{ 'No'|trans({}, 'admin') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {{ form_end(delete_form) }}
+
+
+{% endblock %}

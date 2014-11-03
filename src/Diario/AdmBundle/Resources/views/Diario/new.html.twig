@@ -1,0 +1,91 @@
+{% extends "DiarioAdmBundle::layout.html.twig" %}
+
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+
+{% block title %}{{ '%entity% creation'|trans({'%entity%': 'Diario'}, 'admin') }}{% endblock %}
+
+{% block head_style %}
+
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+    <h1>{{ '%entity% creation'|trans({'%entity%': 'Diario'}, 'admin') }}</h1>
+
+    <form action="{{ path('diario_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button class="btn btn-primary" type="submit">{{ 'Create'|trans({}, 'admin') }}</button>
+        </p>
+    </form>
+        
+    <div class="btn-group record_actions">
+
+        <a class="btn btn-info" href="{{ path('diario') }}">
+            <i class="fa fa-list"></i> {{ 'Back to the list'|trans({}, 'admin') }}
+        </a>
+
+
+    </div>
+
+{% endblock %}
+
+{% block foot_script_assetic %}
+
+    {{ parent() }}
+
+    {% javascripts
+    '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'
+    '@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $(function(){
+            
+            // Carga Horaria JS
+            $("#diario_dia2").prop("disabled",true);
+            $("#diario_dia3").prop("disabled",true);
+            
+            $( "#diario_cargaHoraria" ).change(function() {
+                if ($(this).val() == '30')
+                {
+                    $("#diario_dia2").prop("disabled",true);
+                    $("#diario_dia3").prop("disabled",true);
+                }
+                else if ($(this).val() == '60')
+                {
+                    $("#diario_dia2").prop("disabled",false);
+                    $("#diario_dia3").prop("disabled",true);
+                }
+                else if ($(this).val() == '90')
+                {
+                    $("#diario_dia2").prop("disabled",false);
+                    $("#diario_dia3").prop("disabled",false);
+                }
+            });
+
+            // DatePicker JS
+            $('[data-provider="datepicker"]').datetimepicker({
+                autoclose: true,
+                format: 'dd/mm/yyyy',
+                language: 'pt-BR',
+                minView: 'month',
+                pickerPosition: 'bottom-left',
+                todayBtn: true,
+                startView: 'month'
+            });
+
+            // Restore value from hidden input
+            $('input[type=hidden]', '.date').each(function(){
+                if($(this).val()) {
+                    $(this).parent().datetimepicker('setValue');
+                }
+            });
+
+        });
+    </script>
+
+{% endblock %}

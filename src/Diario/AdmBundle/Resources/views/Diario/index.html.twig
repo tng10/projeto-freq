@@ -1,0 +1,52 @@
+{% extends "DiarioAdmBundle::layout.html.twig" %}
+
+{% block title %}{{ '%entity% list'|trans({'%entity%': 'Diario'}, 'admin') }}{% endblock %}
+
+{% block content %}
+    <h1>{{ '%entity% list'|trans({'%entity%': 'Diario'}, 'admin') }}</h1>
+    <table class="table table-striped table-hover table-bordered records_list">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Codigo Turma</th>
+                <th scope="col">Disciplina</th>
+                <th scope="col">Ano</th>
+                <th scope="col">Semestre</th>
+                <th scope="col">Data Inicio</th>
+                <th scope="col">Data Termino</th>
+                <th scope="col">{{ 'Actions'|trans({}, 'admin') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for turma in turmas %}
+                <tr>
+                    <td><a href="{{ path('diario_show', {id: turma.id}) }}">{{ turma.id }}</a></td>
+                    <td>{{ turma.codigoTurma }}</td>
+                    <td>{{ turma.disciplina }}</td>
+                    <td>{{ turma.ano }}</td>
+                    <td>{{ turma.semestre }}</td>
+                    <td>{% if turma.dataInicio %}{{ turma.dataInicio|date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if turma.dataTermino %}{{ turma.dataTermino|date('Y-m-d') }}{% endif %}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-default btn-sm" href="{{ path('diario_show', {id: turma.id}) }}">
+                                <i class="fa fa-file-o"></i> {{ 'show'|trans({}, 'admin') }}
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {#{{ knp_pagination_render(paginator) }}#}
+    
+    <ul class="new_entry list-unstyled">
+        <li>
+            <a class="btn btn-info" href="{{ path('diario_new') }}">
+                <i class="fa fa-plus"></i> {{ 'Create a new entry'|trans({}, 'admin') }}
+            </a>
+        </li>
+    </ul>
+    
+{% endblock %}

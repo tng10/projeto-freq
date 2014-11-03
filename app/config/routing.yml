@@ -1,0 +1,4 @@
+diario_adm:
+    resource: "@DiarioAdmBundle/Resources/config/routing.yml"
+    prefix:   /
+

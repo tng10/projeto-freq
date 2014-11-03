@@ -1,0 +1,21 @@
+diario:
+    path:     /
+    defaults: { _controller: DiarioAdmBundle:Diario:index }
+
+diario_show:
+    pattern:  /{id}/show
+    defaults: { _controller: DiarioAdmBundle:Diario:show }
+
+diario_new:
+    path:     /new
+    defaults: { _controller: DiarioAdmBundle:Diario:new }
+
+diario_create:
+    pattern:  /create
+    defaults: { _controller: DiarioAdmBundle:Diario:create }
+    requirements: { _method: post }
+
+diario_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "DiarioAdmBundle:Diario:delete" }
+    requirements: { _method: post|delete }

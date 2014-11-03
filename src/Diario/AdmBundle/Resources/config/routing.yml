@@ -1,0 +1,7 @@
+diario_adm_homepage:
+    path:     /
+    defaults: { _controller: DiarioAdmBundle:Default:index }
+
+DiarioAdmBundle_diario:
+    resource: "@DiarioAdmBundle/Resources/config/routing/diario.yml"
+    prefix:   /diario
