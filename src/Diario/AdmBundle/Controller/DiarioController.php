@@ -130,17 +130,28 @@ class DiarioController extends Controller
         if ($form->get('cargaHoraria')->getData() == 30)
         {
             if (is_null($form->get('dia1')->getData()))
-                throw new \Exception("Campo dia 1 obrigatorio");
-                
+            {
+                // throw new \Exception("Campo dia 1 obrigatorio");
+                $this->get('session')->getFlashBag()->add('error', 'O campo dia 1 é obrigatório!');
+                return $this->redirect($this->generateUrl('diario_new'));
+            }    
             $dias[] = $form->get('dia1')->getData();
         }
         else if ($form->get('cargaHoraria')->getData() == 60)
         {
             if (is_null($form->get('dia1')->getData()))
-                throw new \Exception("Campo dia 1 obrigatorio");
+            {
+                // throw new \Exception("Campo dia 1 obrigatorio");
+                $this->get('session')->getFlashBag()->add('error', 'O campo dia 1 é obrigatório!');
+                return $this->redirect($this->generateUrl('diario_new'));
+            }
             
             if (is_null($form->get('dia2')->getData()))
-                throw new \Exception("Campo dia 2 obrigatorio");
+            {
+                // throw new \Exception("Campo dia 2 obrigatorio");
+                $this->get('session')->getFlashBag()->add('error', 'O campo dia 2 é obrigatório!');
+                return $this->redirect($this->generateUrl('diario_new'));
+            }
 
             $dias[] = $form->get('dia1')->getData();  
             $dias[] = $form->get('dia2')->getData();
@@ -148,13 +159,25 @@ class DiarioController extends Controller
         else if ($form->get('cargaHoraria')->getData() == 90)
         {
             if (is_null($form->get('dia1')->getData()))
-                throw new \Exception("Campo dia 1 obrigatorio");
+            {
+                // throw new \Exception("Campo dia 1 obrigatorio");
+                $this->get('session')->getFlashBag()->add('error', 'O campo dia 1 é obrigatório!');
+                return $this->redirect($this->generateUrl('diario_new'));
+            }
             
             if (is_null($form->get('dia2')->getData()))
-                throw new \Exception("Campo dia 2 obrigatorio");
+            {
+                // throw new \Exception("Campo dia 2 obrigatorio");
+                $this->get('session')->getFlashBag()->add('error', 'O campo dia 2 é obrigatório!');
+                return $this->redirect($this->generateUrl('diario_new'));
+            }
             
             if (is_null($form->get('dia3')->getData()))
-                throw new \Exception("Campo dia 3 obrigatorio");
+            {
+                // throw new \Exception("Campo dia 3 obrigatorio");
+                $this->get('session')->getFlashBag()->add('error', 'O campo dia 3 é obrigatório!');
+                return $this->redirect($this->generateUrl('diario_new'));
+            }
 
             $dias[] = $form->get('dia1')->getData();
             $dias[] = $form->get('dia2')->getData();
@@ -180,12 +203,16 @@ class DiarioController extends Controller
 
             if (empty($turma->getDataInicio()))
             {
-                throw new \Exception("Data de inicio obrigatoria");
+                // throw new \Exception("Data de inicio obrigatoria");
+                $this->get('session')->getFlashBag()->add('success', 'Data de inicio é obrigatória!');
+                return $this->redirect($this->generateUrl('diario_new'));
             }
 
             if (empty($turma->getDataTermino()))
             {
-                throw new \Exception("Data de termino obrigatoria");
+                // throw new \Exception("Data de termino obrigatoria");
+                $this->get('session')->getFlashBag()->add('success', 'Data de termino é obrigatória!');
+                return $this->redirect($this->generateUrl('diario_new'));
             }
 
             $bd_turma = $em->getRepository('DiarioAdmBundle:Turma')->findOneBy(
@@ -203,7 +230,9 @@ class DiarioController extends Controller
 
             if (!empty($bd_turma))
             {
-                throw new \Exception("Diario existente");
+                // throw new \Exception("Diario existente");
+                $this->get('session')->getFlashBag()->add('success', 'Este diário já existe no sistema!');
+                return $this->redirect($this->generateUrl('diario_new'));
                 
             }
             
