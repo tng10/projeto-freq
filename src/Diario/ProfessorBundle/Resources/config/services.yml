@@ -1,0 +1,4 @@
+services:
+#    diario_professor.example:
+#        class: Diario\ProfessorBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

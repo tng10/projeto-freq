@@ -1,0 +1,3 @@
+professor:
+    path:     /
+    defaults: { _controller: DiarioProfessorBundle:Default:index }

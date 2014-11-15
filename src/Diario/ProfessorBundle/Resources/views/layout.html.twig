@@ -1,0 +1,59 @@
+{% extends 'MopaBootstrapBundle::base_less.html.twig' %}
+
+{% block title %}Professor - Diário de Classe{% endblock %}
+
+{% block head_script %}
+	
+	{% javascripts 'bundles/diarioadm/components/jquery/dist/jquery.js' %}
+	    <script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+
+{% endblock %}
+
+{% block head_style %}
+	
+	{{ parent() }}
+	
+	{% stylesheets 'bundles/diarioadm/css/*.css' %}
+	    <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+
+	{% stylesheets 'bundles/diarioadm/css/starter-template.css' %}
+        <link type="text/css" rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+
+{% endblock %}
+
+{% block navbar %}
+	{% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, inverse: true } %}
+	    
+	    {% block brand %}
+	        <a class="navbar-brand" href="{{ app.request.uri }}">Diário de Classe Eletrônico</a>
+	    {% endblock %}
+
+	    {% block menu %}
+	        {{ mopa_bootstrap_menu('DiarioAdmBundle:Builder:mainMenu') }}
+	    {% endblock %}
+	{% endembed %}
+
+{% endblock %}
+
+{% block page_header %}{% endblock page_header %}
+
+{% block foot_script_assetic %}
+    {% javascripts
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/tooltip.js'
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/*.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <!-- '@MopaBootstrapBundle/Resources/public/bootstrap/js/*.js' -->
+
+{% endblock foot_script_assetic %}
+
+{% block footer %}
+	<p>&copy; Diário de Classe Eletrônico</a> 2014</p>
+{% endblock footer %}

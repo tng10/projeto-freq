@@ -30,6 +30,7 @@ class Builder extends ContainerAware
 
         // Regular menu item, no change
         $menu->addChild('Diario', array('route' => 'diario'));
+        $menu->addChild('Area Professor', array('route' => 'professor'));
         // $menu->addChild('Curso', array('route' => 'curso'));
         // $menu->addChild('Disciplina', array('route' => 'disciplina'));
         // $menu->addChild('Professor', array('route' => 'professor'));

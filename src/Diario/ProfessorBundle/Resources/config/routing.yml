@@ -1,0 +1,3 @@
+DiarioProfessorBundle_professor:
+    resource: "@DiarioProfessorBundle/Resources/config/routing/professor.yml"
+    prefix:   /professor

@@ -1,3 +1,7 @@
+diario_professor:
+    resource: "@DiarioProfessorBundle/Resources/config/routing.yml"
+    prefix:   /
+
 diario_adm:
     resource: "@DiarioAdmBundle/Resources/config/routing.yml"
     prefix:   /
