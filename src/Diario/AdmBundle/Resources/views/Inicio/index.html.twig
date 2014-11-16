@@ -1,0 +1,23 @@
+{% extends 'DiarioAdmBundle::layout.html.twig' %}
+
+{% block page_header %}
+	<div class="page-header">
+	      <h1>{% block headline %}Bem-vindo ao Diário Eletrônico{% endblock headline %}</h1>
+	</div>
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+
+	<div class="starter-template">
+    	<a href="{{ path('diario_adm_default') }}">
+    		<h1>Acesso ao sistema - Administrador</h1>
+    	</a>
+    	<a href="{{ path('diario_professor_default') }}">
+    		<h1>Acesso ao sistema - Professor</h1>
+    	</a>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,30 @@
+{% extends "DiarioUsuarioBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+	
+	{% if error %}
+	    <div>{{ error|trans }}</div>
+	{% endif %}
+
+	<form class="form-signin" role="form" action="{{ path("fos_user_security_check") }}" method="post">
+		
+		<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+		<h2 class="form-signin-heading">Please sign in</h2>
+		<input type="text" class="form-control" placeholder="{{ 'security.login.username'|trans }}" id="username" name="_username" required autofocus>
+
+		<input type="password" class="form-control" placeholder="{{ 'security.login.password'|trans }}" id="password" name="_password" required>
+	
+		<div class="checkbox">
+			<label>
+		    	<input type="checkbox" id="remember_me" name="_remember_me" value="remember-me"> {{ 'security.login.remember_me'|trans }}
+		  	</label>
+		</div>
+		
+		<button class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit" type="submit">{{ 'security.login.submit'|trans }}</button>
+	</form>
+
+{% endblock fos_user_content %}
+

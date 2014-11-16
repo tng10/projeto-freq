@@ -1,4 +1,4 @@
-diario_adm_homepage:
+diario_adm_default:
     path:     /
     defaults: { _controller: DiarioAdmBundle:Default:index }
 

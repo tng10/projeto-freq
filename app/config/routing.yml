@@ -1,8 +1,18 @@
+diario_usuario:
+    resource: "@DiarioUsuarioBundle/Resources/config/routing.yml"
+    prefix:   /
+
 diario_professor:
     resource: "@DiarioProfessorBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /professor
 
 diario_adm:
     resource: "@DiarioAdmBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /adm
 
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"	
+
+diario_homepage:
+    path:     /
+    defaults: { _controller: DiarioAdmBundle:Inicio:index }
