@@ -22,7 +22,7 @@ class Builder extends ContainerAware
         // Regular menu item, no change
         // $menu->addChild('Cursos', array('route' => 'professor_curso_index'));
         // $menu->addChild('Disciplinas', array('route' => 'professor_disciplina_index'));
-        // $menu->addChild('Turmas', array('route' => 'professor_turma_index'));
+        $menu->addChild('Turmas', array('route' => 'professor_turma_index'));
 
         // Create a dropdown
         $dropdown = $menu->addChild($usuario, array(

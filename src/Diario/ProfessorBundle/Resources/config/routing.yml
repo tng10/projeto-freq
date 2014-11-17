@@ -2,6 +2,6 @@ diario_professor_default:
     path:     /
     defaults: { _controller: DiarioProfessorBundle:Default:index }
 
-DiarioProfessorBundle_professor:
-    resource: "@DiarioProfessorBundle/Resources/config/routing/professor.yml"
-    prefix:   /professor
+DiarioProfessorBundle_turma:
+    resource: "@DiarioProfessorBundle/Resources/config/routing/turma.yml"
+    prefix:   /turma

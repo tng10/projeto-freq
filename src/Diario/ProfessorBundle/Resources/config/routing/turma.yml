@@ -1,0 +1,27 @@
+professor_turma_index:
+    path:     /
+    defaults: { _controller: DiarioProfessorBundle:Turma:index }
+
+professor_turma_show:
+    path:     /{id}/show
+    defaults: { _controller: DiarioProfessorBundle:Turma:show }
+
+professor_turma_importar:
+    path:     /{id}/importar
+    defaults: { _controller: DiarioProfessorBundle:Turma:importar }
+
+professor_turma_processar:
+    path:     /processar
+    defaults: { _controller: DiarioProfessorBundle:Turma:processar }
+
+professor_turma_diario:
+    path:     /{id}/diario
+    defaults: { _controller: DiarioProfessorBundle:Turma:diario }
+
+professor_turma_diario_show:
+    path:     /{id}/listadia
+    defaults: { _controller: DiarioProfessorBundle:Turma:listaDia }
+
+professor_turma_diario_processar:
+    path:     /diario/processar
+    defaults: { _controller: DiarioProfessorBundle:Turma:diarioProcessar }

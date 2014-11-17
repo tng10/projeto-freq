@@ -1,0 +1,46 @@
+{% extends "DiarioProfessorBundle::layout.html.twig" %}
+{% from 'DiarioProfessorBundle::layout.html.twig' import flash %}  
+
+{% block content %}
+
+	<h1>
+		Diario - {{ turma.disciplina.codigoDisciplina }} - 
+		Ano/Sem: {{ turma.ano ~ '/' ~ turma.semestre }}
+	</h1>
+
+	{% if app.session.flashbag.peekAll|length > 0 %}
+        <div class="row">
+            <div class="col-lg-12">
+                {{ flash(true) }}
+            </div>
+        </div>
+    {% endif %}
+
+    <table class="table table-hover record_properties">
+        <tbody>
+        	{% for aula in turma.aulas %}
+	            <tr>
+	                <th scope="row">Aula {{ loop.index }}</th>
+	                <td>
+	                	<a href="{{ path('professor_turma_diario_show', {id: aula.id}) }}">
+	                		{{ aula.data | date('d/m/Y') }}
+	                	</a>
+	                </td>
+	            </tr>
+            {% endfor %}
+		</tbody>
+    </table>
+
+{% endblock %}
+
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script>
+        $(document).ready (function(){
+            $("#alerta").alert();
+            $("#alerta").fadeTo(2000, 500).slideUp(500, function(){
+                $("#alerta").alert('close');
+            });   
+        });
+    </script>
+{% endblock %}

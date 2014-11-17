@@ -35,14 +35,14 @@ class Aula
      */
     protected $turma;
 
-    
-    //@ORM\OneToMany(targetEntity="AlunoHasAula", mappedBy="aula", cascade={"persist","refresh"})
-    // protected $alunos;
-
+    /**
+     * @ORM\OneToMany(targetEntity="AlunoHasAula", mappedBy="aula", cascade={"persist","refresh"})
+     */
+    protected $alunos;
 
     public function __construct()
     {
-        // $this->alunos = new ArrayCollection();
+        $this->alunos = new ArrayCollection();
     }
 
 

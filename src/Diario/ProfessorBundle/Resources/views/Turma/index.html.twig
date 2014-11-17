@@ -1,0 +1,44 @@
+{% extends "DiarioProfessorBundle::layout.html.twig" %}
+
+{% block title %}{{ '%entity% list'|trans({'%entity%': 'Turma'}, 'admin') }}{% endblock %}
+
+{% block content %}
+    <h1>{{ '%entity% list'|trans({'%entity%': 'Turma'}, 'admin') }}</h1>
+
+    <table class="table table-striped table-hover table-bordered records_list">
+        <thead>
+            <tr>
+                <th scope="col">Codigo Turma</th>
+                <th scope="col">Disciplina</th>
+                <th scope="col">Ano/Sem</th>
+                <th scope="col">Diário</th>
+                <th scope="col">Data Inicio</th>
+                <th scope="col">Data Termino</th>
+                <th scope="col">{{ 'Actions'|trans({}, 'admin') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for turma in paginator %}
+                {% set diario = not diarios[loop.index-1] %}
+                <tr>
+                    <td>{{ turma.codigoTurma }}</td>
+                    <td>{{ turma.disciplina }}</td>
+                    <td>{{ turma.ano ~ '/' ~ turma.semestre }}</td>
+                    <td>{% if diario %}Sim{% else %}Não{% endif %}</td>
+                    <td>{% if turma.dataInicio %}{{ turma.dataInicio|date('d/m/Y') }}{% endif %}</td>
+                    <td>{% if turma.dataTermino %}{{ turma.dataTermino|date('d/m/Y') }}{% endif %}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-default btn-sm" href="{{ path('professor_turma_show', {id: turma.id}) }}">
+                                <i class="fa fa-file-o"></i> {{ 'show'|trans({}, 'admin') }}
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {{ knp_pagination_render(paginator) }}
+    
+{% endblock %}

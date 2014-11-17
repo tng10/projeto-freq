@@ -204,14 +204,14 @@ class DiarioController extends Controller
             if (empty($turma->getDataInicio()))
             {
                 // throw new \Exception("Data de inicio obrigatoria");
-                $this->get('session')->getFlashBag()->add('success', 'Data de inicio é obrigatória!');
+                $this->get('session')->getFlashBag()->add('error', 'Data de inicio é obrigatória!');
                 return $this->redirect($this->generateUrl('diario_new'));
             }
 
             if (empty($turma->getDataTermino()))
             {
                 // throw new \Exception("Data de termino obrigatoria");
-                $this->get('session')->getFlashBag()->add('success', 'Data de termino é obrigatória!');
+                $this->get('session')->getFlashBag()->add('error', 'Data de termino é obrigatória!');
                 return $this->redirect($this->generateUrl('diario_new'));
             }
 
@@ -231,7 +231,7 @@ class DiarioController extends Controller
             if (!empty($bd_turma))
             {
                 // throw new \Exception("Diario existente");
-                $this->get('session')->getFlashBag()->add('success', 'Este diário já existe no sistema!');
+                $this->get('session')->getFlashBag()->add('error', 'Este diário já existe no sistema!');
                 return $this->redirect($this->generateUrl('diario_new'));
                 
             }

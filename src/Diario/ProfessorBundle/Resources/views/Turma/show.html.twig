@@ -1,0 +1,82 @@
+{% extends "DiarioProfessorBundle::layout.html.twig" %}
+
+{% block title %}Turma{% endblock %}
+
+{% block content %}
+    <h1>Turma</h1>
+
+    <table class="table table-hover record_properties">
+        <tbody>
+            <tr>
+                <th scope="row">Id</th>
+                <td>{{ turma.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Codigoturma</th>
+                <td>{{ turma.codigoTurma }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Disciplina</th>
+                <td>{{ turma.disciplina.nome }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Cod. Disciplina</th>
+                <td>{{ turma.disciplina.codigoDisciplina }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Curso</th>
+                <td>{{ turma.disciplina.curso }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Professor</th>
+                <td>{{ turma.professor }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Ano</th>
+                <td>{{ turma.ano }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Semestre</th>
+                <td>{{ turma.semestre }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Data Inicio</th>
+                <td>{{ turma.dataInicio|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Data Termino</th>
+                <td>{{ turma.dataTermino|date('d/m/Y') }}</td>
+            </tr>
+            {% for horario in turma.horarios %}
+                <tr>
+                    <th scope="row">Horario {{ loop.index }}</th>
+                    <td>{{ horario.dia ~ ' - ' ~ horario.hora | date('H:i:s') }}</td>
+                </tr>
+            {% endfor %}
+            {% if turma.aulas is empty and turma.horarios is not empty %}
+                <tr>
+                    <th scope="row">Gerar aulas</th>
+                    <td>
+                        <a href="{{ path('turma_gerar_aulas', {idTurma: turma.id}) }}">Gerar aulas</a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if importar %}
+                <tr>
+                    <th scope="row">Importar diario de classe</th>
+                    <td>
+                        <a href="{{ path('professor_turma_importar', {id: turma.id}) }}">Importar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th scope="row">Diario de classe</th>
+                    <td>
+                        <a href="{{ path('professor_turma_diario', {id: turma.id}) }}">Acessar diario de classe</a>
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}

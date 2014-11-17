@@ -3,14 +3,15 @@
 namespace Diario\AdmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Professor
+ * Aluno
  *
- * @ORM\Table(name="professor")
+ * @ORM\Table(name="aluno")
  * @ORM\Entity
  */
-class Professor
+class Aluno
 {
     /**
      * @var integer
@@ -30,22 +31,27 @@ class Professor
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=75)
+     * @ORM\Column(name="email", type="string", length=45)
      */
     private $email;
 
     /**
-     * @ORM\OneToOne(targetEntity="Diario\UsuarioBundle\Entity\Usuario", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="fos_user_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="AlunoHasAula", mappedBy="aluno", cascade={"persist","refresh"})
      */
-    private $usuario;
+    protected $aulas;
+    
 
+
+    public function __construct()
+    {
+        $this->aulas = new ArrayCollection();
+    }
 
     /**
      * Set id
      *
      * @param integer $id
-     * @return Professor
+     * @return Aluno
      */
     public function setId($id)
     {
@@ -68,7 +74,7 @@ class Professor
      * Set nome
      *
      * @param string $nome
-     * @return Professor
+     * @return Aluno
      */
     public function setNome($nome)
     {
@@ -91,7 +97,7 @@ class Professor
      * Set email
      *
      * @param string $email
-     * @return Professor
+     * @return Aluno
      */
     public function setEmail($email)
     {
@@ -119,28 +125,39 @@ class Professor
     {
         return $this->nome; 
     }
-
-
-    /**
-     * Set usuario
-     *
-     * @param \Diario\UsuarioBundle\Entity\Usuario $usuario
-     * @return Professor
-     */
-    // public function setUsuario(\Diario\UsuarioBundle\Entity\Usuario $usuario = null)
-    // {
-    //     $this->usuario = $usuario;
-
-    //     return $this;
-    // }
+    
+    
 
     /**
-     * Get usuario
+     * Add aulas
      *
-     * @return \Diario\UsuarioBundle\Entity\Usuario 
+     * @param \Diario\AdmBundle\Entity\AlunoHasAula $aulas
+     * @return Aluno
      */
-    // public function getUsuario()
-    // {
-    //     return $this->usuario;
-    // }
+    public function addAula(\Diario\AdmBundle\Entity\AlunoHasAula $aulas)
+    {
+        $this->aulas[] = $aulas;
+
+        return $this;
+    }
+
+    /**
+     * Remove aulas
+     *
+     * @param \Diario\AdmBundle\Entity\AlunoHasAula $aulas
+     */
+    public function removeAula(\Diario\AdmBundle\Entity\AlunoHasAula $aulas)
+    {
+        $this->aulas->removeElement($aulas);
+    }
+
+    /**
+     * Get aulas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAulas()
+    {
+        return $this->aulas;
+    }
 }
